@@ -42,8 +42,7 @@ jobs:
       if: always()
       run: |
         cd ${{ env.CAMINHO_TESTES }}
-        npm install newman@5.1.2
-        npm install newman-reporter-htmlextra@1.20.4
+        npm install --unsafe-perm=true newman-reporter-htmlextra@1.20.4
         newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json -r htmlextra
 
     - name: Upload como Artifact do Report com resultado dos testes (Postman + Newman)
