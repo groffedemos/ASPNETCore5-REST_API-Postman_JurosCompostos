@@ -42,7 +42,9 @@ jobs:
       if: always()
       run: |
         cd ${{ env.CAMINHO_TESTES }}
-        npm install --unsafe-perm=true newman-reporter-htmlextra@1.20.4
+        npm install newman@5.1.2
+        npm ls newman
+        npm install newman-reporter-htmlextra@1.20.4
         npm ls newman-reporter-htmlextra
         newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json -r htmlextra
 
