@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 env:
-  IMAGEM_AZURECR: ${{ secrets.AZURECR_REGISTRY }}/apifinancas-newman
+  NOME_IMAGEM: apifinancas-newman
   CAMINHO_PROJETO_WEBAPP: ./APIFinancas
   CAMINHO_TESTES: ./Tests
   NOME_APLICACAO: apifinancas
@@ -26,11 +26,11 @@ jobs:
     - name: Build de imagem
       run: |
         cd ${{ env.CAMINHO_PROJETO_WEBAPP }}
-        docker build . --file Dockerfile --tag ${{ env.IMAGEM_AZURECR }}:latest
+        docker build . --file Dockerfile --tag ${{ secrets.AZURECR_REGISTRY }}/${{ env.NOME_IMAGEM }}:latest
         
     - name: Criação de container para testes com a API
       run: |
-        docker run --name api-testes -p 1234:80 -d ${{ env.IMAGEM_AZURECR }}:latest
+        docker run --name api-testes -p 1234:80 -d ${{ secrets.AZURECR_REGISTRY }}/${{ env.NOME_IMAGEM }}:latest
         docker container ls
 
     - name: Configurar porta da API no arquivo com os testes
@@ -76,8 +76,8 @@ jobs:
 
     - name: Geração de tag com número do Build e Push no Azure Container Registry
       run: |
-        docker tag ${{ env.IMAGEM_AZURECR }}:latest ${{ env.IMAGEM_AZURECR }}:$GITHUB_RUN_NUMBER
-        docker push --all-tags ${{ env.IMAGEM_AZURECR }}
+        docker tag ${{ secrets.AZURECR_REGISTRY }}/${{ env.NOME_IMAGEM }}:latest ${{ secrets.AZURECR_REGISTRY }}/${{ env.NOME_IMAGEM }}:$GITHUB_RUN_NUMBER
+        docker push --all-tags ${{ secrets.AZURECR_REGISTRY }}/${{ env.NOME_IMAGEM }}
 
   deployment-aks:
     needs: [build-tests-push]
