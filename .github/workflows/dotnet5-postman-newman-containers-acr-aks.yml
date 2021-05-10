@@ -10,6 +10,10 @@ env:
   IMAGEM_AZURECR: ${{ secrets.AZURECR_REGISTRY }}/apifinancas-newman
   CAMINHO_PROJETO_WEBAPP: ./APIFinancas
   CAMINHO_TESTES: ./Tests
+  NOME_APLICACAO: apifinancas
+  AZURE_RESOURCE_GROUP_K8S: TesteKubernetes
+  AZURE_CLUSTER_K8S: AKSCluster
+  NAMESPACE_K8S: apifinancasgha  
 
 jobs:
   build-tests-push:

@@ -1,0 +1,28 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: APPLICATION-NAME 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: APPLICATION-NAME
+  template:
+    metadata:
+      labels:
+        app: APPLICATION-NAME
+    spec:
+      containers:
+        - name: APPLICATION-NAME
+          image: CR-DEPLOYMENT/IMAGE-DEPLOYMENT:TAG-DEPLOYMENT
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: APPLICATION-NAME
+spec:
+    type: LoadBalancer
+    ports:
+    - port: 80 
+    selector:
+        app: APPLICATION-NAME
