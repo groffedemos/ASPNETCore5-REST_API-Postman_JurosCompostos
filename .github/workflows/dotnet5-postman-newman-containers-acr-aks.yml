@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 env:
-  IMAGEM_AZURECR: ${{ secrets.AZURECR_REGISTRY }}/apitemperatura-newman
+  IMAGEM_AZURECR: ${{ secrets.AZURECR_REGISTRY }}/apifinancas-newman
   CAMINHO_PROJETO_WEBAPP: ./APIFinancas
   CAMINHO_TESTES: ./Tests
 
@@ -32,6 +32,8 @@ jobs:
     - name: Testes da API REST com Newman
       run: |
         cd ${{ env.CAMINHO_TESTES }}
+        echo "** Versão Global do Newman **"
+        newman -v
         newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json
 
     - name: Geração de relatório HTML com os resultados do Newman
@@ -39,6 +41,10 @@ jobs:
       run: |
         cd ${{ env.CAMINHO_TESTES }}
         npm install newman@5.1.2
+        echo "** Versão Global do Newman **"
+        newman -v
+        echo "** Versão Local do Newman **"
+        npx newman -v
         npm install newman-reporter-htmlextra@1.20.4
         npx newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json -r htmlextra
 
