@@ -36,7 +36,7 @@ jobs:
 
     - name: Instalar newman-reporter-htmlextra
       if: always()
-      run: npm install newman-reporter-htmlextra
+      run: npm install -D newman-reporter-htmlextra
 
     - name: Geração de relatório HTML com os resultados do Newman
       if: always()
