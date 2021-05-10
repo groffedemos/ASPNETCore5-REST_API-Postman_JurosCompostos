@@ -33,13 +33,16 @@ jobs:
       run: |
         cd ${{ env.CAMINHO_TESTES }}
         newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json
-        
+
+    - name: Instalar newman-reporter-htmlextra
+      if: always()
+      run: npm install -g newman-reporter-htmlextra
+
     - name: Geração de relatório HTML com os resultados do Newman
       if: always()
       run: |
         cd ${{ env.CAMINHO_TESTES }}
         newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json -r htmlextra
-
 
     - name: Upload como Artifact do Report com resultado dos testes (Postman + Newman)
       uses: actions/upload-artifact@v2.2.3
