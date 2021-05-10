@@ -29,9 +29,10 @@ jobs:
         docker run --name api-testes -p 1234:80 -d ${{ env.IMAGEM_AZURECR }}:latest
         docker container ls
 
-    - name: Configurar manifesto de Deployment
+    - name: Configurar porta da API no arquivo com os testes
       run: |
-        sed -i 's/5000/1234/' '{{ env.CAMINHO_TESTES }}/CalculoJurosCompostos.postman_collection.json'
+        cd ${{ env.CAMINHO_TESTES }}
+        sed -i 's/5000/1234/' CalculoJurosCompostos.postman_collection.json
 
     - name: Testes da API REST com Newman
       run: |
