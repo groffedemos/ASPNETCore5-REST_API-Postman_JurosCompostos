@@ -18,9 +18,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2.3.4
-
-    - name: Testes
-      run: npm ls newman
       
     - name: Build de imagem
       run: |
