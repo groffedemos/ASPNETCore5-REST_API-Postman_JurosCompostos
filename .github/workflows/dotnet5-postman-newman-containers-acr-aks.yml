@@ -46,7 +46,7 @@ jobs:
         npm install newman-reporter-htmlextra@1.20.4
         cd node_modules
         ls
-        newman run ../CalculoJurosCompostos.postman_collection.json -d ../data-tests.json -r htmlextra
+        npx newman run ../CalculoJurosCompostos.postman_collection.json -d ../data-tests.json -r htmlextra
 
     - name: Upload como Artifact do Report com resultado dos testes (Postman + Newman)
       uses: actions/upload-artifact@v2.2.3
