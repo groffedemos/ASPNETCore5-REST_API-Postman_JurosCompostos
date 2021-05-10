@@ -34,15 +34,11 @@ jobs:
         cd ${{ env.CAMINHO_TESTES }}
         newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json
 
-    #- name: Instalar newman-reporter-htmlextra
-    #  if: always()
-    #  run: npm install -D newman-reporter-htmlextra
-    #         npm install newman@5.1.2
-
     - name: Geração de relatório HTML com os resultados do Newman
       if: always()
       run: |
         cd ${{ env.CAMINHO_TESTES }}
+        npm install newman@5.1.2
         npm install newman-reporter-htmlextra@1.20.4
         npx newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json -r htmlextra
 
