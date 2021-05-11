@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: apifinancas-configmap
 data:
-  AppInsights_APIFinancas: d3c6204a-f542-4f95-84b2-29494e32a363
+  AppInsights_APIFinancas: CHAVE DE INSTRUMENTAÇÃO
