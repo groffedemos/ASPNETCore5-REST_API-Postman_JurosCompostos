@@ -15,6 +15,12 @@ spec:
       containers:
         - name: APPLICATION-NAME
           image: CR-DEPLOYMENT/IMAGE-DEPLOYMENT:TAG-DEPLOYMENT
+          env:
+            - name: ApplicationInsights__InstrumentationKey
+              valueFrom:
+                configMapKeyRef:
+                  name: apifinancas-configmap
+                  key: AppInsights_APIFinancas
 ---
 apiVersion: v1
 kind: Service
