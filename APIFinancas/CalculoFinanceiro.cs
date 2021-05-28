@@ -3,7 +3,7 @@ using System;
 namespace APIFinancas
 {
     public static class CalculoFinanceiro
-    {// 2 3
+    {// 2 3 4
         public static double CalcularValorComJurosCompostos(
             double valorEmprestimo, int numMeses, double percTaxa)
         {
