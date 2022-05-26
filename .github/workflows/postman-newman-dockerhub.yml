@@ -48,9 +48,8 @@ jobs:
         cd ./newman
         ls
         chmod -R 777 *.xml
-        mv *.xml ./
-        echo "** JUNIT"
-        cd /
+        mv *.xml $GITHUB_WORKSPACE
+        cd GITHUB_WORKSPACE
         ls
 
     - name: Criar Test Summary
