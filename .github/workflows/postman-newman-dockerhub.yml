@@ -46,7 +46,7 @@ jobs:
         newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json -r cli,junit
 
     - name: Criar Test Summary
-      uses: test-summary/action@dist
+      uses: test-summary/action@v1.0
       env:
         CAMINHO_RESULTADO_TESTES: ${{ env.CAMINHO_TESTES }}/newman/*.xml
       if: always()
