@@ -44,9 +44,6 @@ jobs:
         echo "** Versão Global do Newman **"
         newman -v
         newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json
-        #chmod -R 777 ./newman
-        #cd ./newman
-        #ls
 
     - name: Geração XML do JUnit com Newman contendo resultado dos testes da API REST 
       if: always()
@@ -56,6 +53,8 @@ jobs:
         npx newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json -r junit --reporter-junit-export 'result-apitests.xml'
         echo "** Diretório dos testes após execução do Newman **"
         ls
+        echo "** Conteúdo do arquivo result-apitests.xml"
+        cat result-apitests.xml
 
     - name: Criar Test Summary
       uses: test-summary/action@dist
