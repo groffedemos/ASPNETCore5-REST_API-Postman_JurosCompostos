@@ -45,6 +45,9 @@ jobs:
         newman -v
         npm install newman-reporter-htmlextra@1.22.9
         npx newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json -r htmlextra,cli,junit
+        echo "** Arquivos + diretórios gerados **"
+        cd newman
+        ls
 
     - name: Criar Test Summary
       uses: test-summary/action@dist
