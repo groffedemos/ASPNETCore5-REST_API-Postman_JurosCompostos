@@ -1,4 +1,4 @@
-name: dotnet5-newman-containers-acr-appservice
+name: postman-newman-dockerhub
 
 on:
   push:
@@ -55,7 +55,7 @@ jobs:
         echo "** Versão Local do Newman **"
         npx newman -v
         npm install newman-reporter-htmlextra@1.22.9
-        npx newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json -r htmlextra
+        npx newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json -r htmlextra,cli,junit
 
     - name: Upload como Artifact do Report com resultado dos testes (Postman + Newman)
       uses: actions/upload-artifact@v2.2.3
