@@ -52,18 +52,15 @@ jobs:
       if: always()
       run: |
         cd ${{ env.CAMINHO_TESTES }}
-        echo "** Versão Global do Newman **"
-        newman -v
         npm install newman-reporter-xunit@2.4.4
         npx newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json -r junit --reporter-junit-export 'result-apitests.xml'
-        echo "** Arquivos + diretórios gerados **"
-        cd newman
+        echo "** Diretório dos testes após execução do Newman **"
         ls
 
     - name: Criar Test Summary
       uses: test-summary/action@dist
       env:
-        CAMINHO_RESULTADO_TESTES: ${{ env.CAMINHO_TESTES }}/newman/result-apitests.xml
+        CAMINHO_RESULTADO_TESTES: ${{ env.CAMINHO_TESTES }}/result-apitests.xml
       if: always()
       with:
         paths: ${{ env.CAMINHO_RESULTADO_TESTES }}
