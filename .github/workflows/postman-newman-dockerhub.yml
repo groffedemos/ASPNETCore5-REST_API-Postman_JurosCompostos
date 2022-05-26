@@ -40,11 +40,18 @@ jobs:
 
     - name: Testes da API REST com Newman
       run: |
+        mkdir JUnit
         cd ${{ env.CAMINHO_TESTES }}
         echo "** Versão Global do Newman **"
         newman -v
         newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json -r cli,junit
         chmod -R 777 ./newman
+        cd ./newman
+        ls
+        mv *.xml ./JUnit
+        cd ./JUnit
+        ** JUNIT
+        ls
 
     - name: Criar Test Summary
       uses: test-summary/action@dist
@@ -52,7 +59,7 @@ jobs:
         CAMINHO_RESULTADO_TESTES: ${{ env.CAMINHO_TESTES }}/newman/
       if: always()
       with:
-        paths: ${{ env.CAMINHO_RESULTADO_TESTES }}
+        paths: ./JUnit
         
     - name: Testes da API REST com Newman + HTML Report + XML JUnit
       if: always()
