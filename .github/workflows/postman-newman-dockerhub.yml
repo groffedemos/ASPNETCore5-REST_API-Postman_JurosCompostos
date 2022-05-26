@@ -45,9 +45,9 @@ jobs:
         echo "** Versão Global do Newman **"
         newman -v
         newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json -r cli,junit
-        chmod -R 777 ./newman
         cd ./newman
         ls
+        chmod -R 777 *.xml
         mv *.xml /JUnit
         echo "** JUNIT"
         cd JUnit
