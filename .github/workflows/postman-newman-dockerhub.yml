@@ -52,7 +52,7 @@ jobs:
         echo "** Versão Global do Newman **"
         newman -v
         npm install newman-reporter-junitfullreport@1.0.4
-        npx newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json -r junit --reporter-junitfullreport-export 'testresults-restapi.xml'
+        npx newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json -r junitfullreport --reporter-junitfullreport-export 'testresults-restapi.xml'
         echo "** Arquivos no diretório de testes após execução do Newman **"
         ls
 
