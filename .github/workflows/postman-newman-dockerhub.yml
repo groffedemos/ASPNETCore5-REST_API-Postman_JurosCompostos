@@ -48,9 +48,9 @@ jobs:
         chmod -R 777 ./newman
         cd ./newman
         ls
-        mv *.xml ../JUnit
+        mv *.xml /JUnit
+        echo "** JUNIT"
         cd JUnit
-        ** JUNIT
         ls
 
     - name: Criar Test Summary
