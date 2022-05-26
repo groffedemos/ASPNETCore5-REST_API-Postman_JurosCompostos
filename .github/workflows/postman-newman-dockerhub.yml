@@ -44,6 +44,7 @@ jobs:
         echo "** Versão Global do Newman **"
         newman -v
         newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json -r cli,junit
+        chmod -R 777 ./newman
 
     - name: Criar Test Summary
       uses: test-summary/action@dist
@@ -60,7 +61,7 @@ jobs:
         echo "** Versão Global do Newman **"
         newman -v
         npm install newman-reporter-htmlextra@1.22.9
-        npx newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json -r htmlextra,cli,junit
+        npx newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json -r htmlextra
         echo "** Arquivos + diretórios gerados **"
         cd newman
         ls
