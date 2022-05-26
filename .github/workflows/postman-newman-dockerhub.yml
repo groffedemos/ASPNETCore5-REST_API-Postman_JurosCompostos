@@ -40,24 +40,35 @@ jobs:
 
     - name: Testes da API REST com Newman
       run: |
-        mkdir JUnit
         cd ${{ env.CAMINHO_TESTES }}
         echo "** Versão Global do Newman **"
         newman -v
-        newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json -r cli,junit
-        chmod -R 777 ./newman
-        cd ./newman
+        newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json
+        #chmod -R 777 ./newman
+        #cd ./newman
+        #ls
+
+    - name: Geração XML do JUnit com Newman contendo resultado dos testes da API REST 
+      if: always()
+      run: |
+        cd ${{ env.CAMINHO_TESTES }}
+        echo "** Versão Global do Newman **"
+        newman -v
+        npm install newman-reporter-xunit@2.4.4
+        npx newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json -r junit --reporter-junit-export 'result-apitests.xml'
+        echo "** Arquivos + diretórios gerados **"
+        cd newman
         ls
-        
+
     - name: Criar Test Summary
       uses: test-summary/action@dist
       env:
-        CAMINHO_RESULTADO_TESTES: ${{ env.CAMINHO_TESTES }}/newman/*.xml
+        CAMINHO_RESULTADO_TESTES: ${{ env.CAMINHO_TESTES }}/newman/result-apitests.xml
       if: always()
       with:
         paths: ${{ env.CAMINHO_RESULTADO_TESTES }}
         
-    - name: Testes da API REST com Newman + HTML Report + XML JUnit
+    - name: Geração de HTML Report com Newman contendo resultado dos testes da API REST
       if: always()
       run: |
         cd ${{ env.CAMINHO_TESTES }}
