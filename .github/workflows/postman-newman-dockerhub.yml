@@ -45,20 +45,17 @@ jobs:
         echo "** Versão Global do Newman **"
         newman -v
         newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json -r cli,junit
+        chmod -R 777 *.xml
         cd ./newman
         ls
-        chmod -R 777 *.xml
-        mv *.xml $GITHUB_WORKSPACE
-        cd GITHUB_WORKSPACE
-        ls
-
+        
     - name: Criar Test Summary
       uses: test-summary/action@dist
       env:
-        CAMINHO_RESULTADO_TESTES: ${{ env.CAMINHO_TESTES }}/newman/
+        CAMINHO_RESULTADO_TESTES: ${{ env.CAMINHO_TESTES }}/newman/*.xml
       if: always()
       with:
-        paths: ./*.xml
+        paths: ${{ env.CAMINHO_RESULTADO_TESTES }}
         
     - name: Testes da API REST com Newman + HTML Report + XML JUnit
       if: always()
