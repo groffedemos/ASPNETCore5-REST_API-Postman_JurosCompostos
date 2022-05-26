@@ -48,8 +48,8 @@ jobs:
         chmod -R 777 ./newman
         cd ./newman
         ls
-        mv *.xml ./JUnit
-        cd ./JUnit
+        mv *.xml ../JUnit
+        cd JUnit
         ** JUNIT
         ls
 
