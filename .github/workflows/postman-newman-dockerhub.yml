@@ -48,9 +48,9 @@ jobs:
         cd ./newman
         ls
         chmod -R 777 *.xml
-        mv *.xml /JUnit
+        mv *.xml ./
         echo "** JUNIT"
-        cd JUnit
+        cd /
         ls
 
     - name: Criar Test Summary
@@ -59,7 +59,7 @@ jobs:
         CAMINHO_RESULTADO_TESTES: ${{ env.CAMINHO_TESTES }}/newman/
       if: always()
       with:
-        paths: ./JUnit
+        paths: ./*.xml
         
     - name: Testes da API REST com Newman + HTML Report + XML JUnit
       if: always()
