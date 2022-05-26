@@ -56,6 +56,12 @@ jobs:
         echo "** Arquivos no diretório de testes após execução do Newman **"
         ls
 
+    - name: Teste
+      if: always()
+      run: |
+        cd ${{ env.CAMINHO_TESTES }}
+        ls
+
     - name: Criar Test Summary
       uses: test-summary/action@v1.0
       env:
