@@ -43,7 +43,19 @@ jobs:
         cd ${{ env.CAMINHO_TESTES }}
         echo "** Versão Global do Newman **"
         newman -v
-        newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json -r cli -r junit
+        newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json
+        
+    - name: Geração de HTML Report com Newman contendo resultado dos testes da API REST
+      if: always()
+      run: |
+        cd ${{ env.CAMINHO_TESTES }}
+        echo "** Versão Global do Newman **"
+        newman -v
+        npm install newman-reporter-htmlextra@1.22.9
+        npx newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json -r htmlextra -r junit
+        echo "** Arquivos + diretórios gerados **"
+        cd newman
+        ls
 
     - name: Criar Test Summary
       uses: test-summary/action@v1.0
@@ -53,18 +65,6 @@ jobs:
       with:
         paths: ${{ env.CAMINHO_RESULTADO_TESTES }}
         
-    - name: Geração de HTML Report com Newman contendo resultado dos testes da API REST
-      if: always()
-      run: |
-        cd ${{ env.CAMINHO_TESTES }}
-        echo "** Versão Global do Newman **"
-        newman -v
-        npm install newman-reporter-htmlextra@1.22.9
-        npx newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json -r htmlextra
-        echo "** Arquivos + diretórios gerados **"
-        cd newman
-        ls
-
     - name: Upload como Artifact do Report com resultado dos testes (Postman + Newman)
       uses: actions/upload-artifact@v2.2.3
       env:
