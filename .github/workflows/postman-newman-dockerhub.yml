@@ -52,7 +52,8 @@ jobs:
         echo "** Versão Global do Newman **"
         newman -v
         npm install newman-reporter-htmlextra@1.22.9
-        npx newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json -r htmlextra -r junit
+        npm install newman-reporter-junitfullreport@1.0.4
+        npx newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json -r htmlextra -r junitfullreport
         echo "** Arquivos + diretórios gerados **"
         cd newman
         ls
