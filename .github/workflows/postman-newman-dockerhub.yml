@@ -43,7 +43,7 @@ jobs:
         cd ${{ env.CAMINHO_TESTES }}
         echo "** Versão Global do Newman **"
         newman -v
-        newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json -r cli,junit
+        newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json -r cli -r junit
 
     - name: Criar Test Summary
       uses: test-summary/action@v1.0
