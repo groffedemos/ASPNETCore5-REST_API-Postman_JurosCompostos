@@ -38,14 +38,14 @@ jobs:
         cd ${{ env.CAMINHO_TESTES }}
         sed -i 's/5000/1234/' CalculoJurosCompostos.postman_collection.json
 
-    - name: Testes da API REST com Newman
-      run: |
-        cd ${{ env.CAMINHO_TESTES }}
-        echo "** Versão Global do Newman **"
-        newman -v
-        newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json
+    #- name: Testes da API REST com Newman
+    #  run: |
+    #    cd ${{ env.CAMINHO_TESTES }}
+    #    echo "** Versão Global do Newman **"
+    #    newman -v
+    #    newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json
         
-    - name: Geração com Newman de HTML Report + XML do JUnit contendo resultado dos testes da API REST
+    - name: Execução dos testes da API com Newman, além de geração de HTML Report + XML do JUnit
       if: always()
       run: |
         cd ${{ env.CAMINHO_TESTES }}
@@ -67,7 +67,7 @@ jobs:
       with:
         paths: ${{ env.CAMINHO_RESULTADO_TESTES }}
         
-    - name: Upload como Artifact do Report com resultado dos testes (Postman + Newman)
+    - name: Upload como Artifact do Report + XML com resultado dos testes (Postman + Newman)
       uses: actions/upload-artifact@v2.2.3
       env:
         CAMINHO_RESULTADO_TESTES: ${{ env.CAMINHO_TESTES }}/newman/
