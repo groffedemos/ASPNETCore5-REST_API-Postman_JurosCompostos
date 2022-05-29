@@ -45,7 +45,7 @@ jobs:
         newman -v
         newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json
         
-    - name: Geração de HTML Report com Newman contendo resultado dos testes da API REST
+    - name: Geração com Newman de HTML Report + XML do JUnit contendo resultado dos testes da API REST
       if: always()
       run: |
         cd ${{ env.CAMINHO_TESTES }}
@@ -53,7 +53,7 @@ jobs:
         newman -v
         npm install newman-reporter-htmlextra@1.22.9
         npm install newman-reporter-junitfullreport@1.0.4
-        npx newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json -r cli -r htmlextra -r junitfullreport
+        npx newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json -r htmlextra -r junitfullreport
         echo "** Arquivos + diretórios gerados **"
         cd newman
         ls
