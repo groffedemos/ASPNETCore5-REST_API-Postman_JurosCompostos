@@ -1,4 +1,4 @@
-name: postman-newman-dockerhub
+name: postman-newman
 
 on:
   push:
