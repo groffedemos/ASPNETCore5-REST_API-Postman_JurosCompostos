@@ -11,9 +11,6 @@ env:
   CAMINHO_PROJETO_WEBAPP: ./APIFinancas
   CAMINHO_TESTES: ./Tests
   NOME_APLICACAO: apifinancas
-  AZURE_RESOURCE_GROUP_K8S: TesteKubernetes
-  AZURE_CLUSTER_K8S: AKSCluster
-  NAMESPACE_K8S: apifinancasgha  
 
 jobs:
   build-tests-push:
@@ -37,13 +34,6 @@ jobs:
       run: |
         cd ${{ env.CAMINHO_TESTES }}
         sed -i 's/5000/1234/' CalculoJurosCompostos.postman_collection.json
-
-    #- name: Testes da API REST com Newman
-    #  run: |
-    #    cd ${{ env.CAMINHO_TESTES }}
-    #    echo "** Versão Global do Newman **"
-    #    newman -v
-    #    newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json
         
     - name: Execução dos testes da API com Newman, além de geração de HTML Report + XML do JUnit
       if: always()
@@ -53,7 +43,6 @@ jobs:
         newman -v
         npm install newman-reporter-htmlextra@1.22.9
         npm install newman-reporter-junitfullreport@1.0.4
-        #npx newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json -r htmlextra -r junitfullreport
         npx newman run CalculoJurosCompostos.postman_collection.json -d data-tests.json -r cli,htmlextra,junitfullreport        
         echo "** Arquivos + diretórios gerados **"
         cd newman
