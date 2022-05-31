@@ -29,7 +29,7 @@ namespace APIFinancas.Controllers
                $"Número de meses: {numMeses}|" +
                $"% Taxa de Juros: {percTaxa}");
 
-            // Código comentado para simulação de falhas em testes automatizados
+            // Código comentado para simulação de falhas em testes automatizados...
             
             /*if (valorEmprestimo <= 0)
                 return GerarResultParamInvalido("Valor do Empréstimo");
